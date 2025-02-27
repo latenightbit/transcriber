@@ -1,138 +1,102 @@
 # Audio Transcriber
 
-A beginner-friendly Python tool that converts audio files into text using OpenAI's Whisper model. Perfect for those who want to start their journey in audio processing!
+A Python tool that converts audio files into text using the Faster Whisper model (large-v2). This implementation uses CPU-based inference optimized for general use.
 
 ## What Does This Tool Do?
 
-This tool helps you convert spoken words from audio files into written text. It's like having a super-smart assistant that listens to audio and writes down everything it hears!
+This tool transcribes audio files into text using the Faster Whisper model, which is an efficient implementation of OpenAI's Whisper model.
 
 ## Key Features
 
 - 🎵 Works with common audio formats (MP3, WAV, M4A)
-- 🎯 High accuracy in converting speech to text
-- 🌍 Supports multiple languages
-- 💻 Simple command line interface (don't worry, we'll explain how to use it!)
-- 🔒 Clean project setup with virtual environment (we'll explain what this means)
+- 🎯 Uses the large-v2 model for high accuracy
+- 🌍 Supports multiple languages with automatic language detection
+- 💻 Simple command line interface
+- 🚀 Optimized for CPU usage with INT8 quantization
 
-## Before You Start (Prerequisites)
+## System Requirements
 
-1. **Python**: You need Python 3.x installed on your computer
-   - Not sure if you have Python? Open your terminal/command prompt and type: `python --version`
-   - If you don't have Python, download it from [Python's official website](https://www.python.org/downloads/)
+1. **Python**: Python 3.x
+   - Check version: `python --version`
+   - Download from [Python's official website](https://www.python.org/downloads/)
 
-2. **pip**: The Python package installer (usually comes with Python)
-   - To check if you have pip, run: `pip --version`
+2. **Hardware**:
+   - Sufficient RAM (recommended: 8GB+)
+   - Adequate disk space for the model
+   - CPU with good single-thread performance
 
-## Step-by-Step Installation Guide
+## Installation Guide
 
 1. **Download the Project**
    ```bash
-   # Clone this repository (copy all the files to your computer)
    git clone <repository-url>
-   
-   # Go into the project folder
    cd transcriber
    ```
 
-2. **Set Up a Virtual Environment** (like a clean room for your project)
+2. **Set Up a Virtual Environment**
    ```bash
-   # Create a virtual environment named 'venv'
    python -m venv venv
-   
-   # Activate the virtual environment:
-   # On Windows:
-   venv\Scripts\activate
-   # On macOS/Linux:
    source venv/bin/activate
    ```
-   
-   After activation, you should see `(venv)` at the beginning of your terminal line
 
-3. **Install Required Packages**
+3. **Install Required Package**
    ```bash
-   # Install all the tools this project needs
-   pip install -r requirements.txt
+   pip install faster-whisper
    ```
 
 ## How to Use
 
 1. **Basic Usage**
    ```bash
-   # Format:
    python transcribe.py <path-to-your-audio-file>
-   
-   # Example:
-   python transcribe.py my_recording.mp3
    ```
 
-2. **Real Examples**
+2. **Example Usage**
    ```bash
-   # Transcribe an MP3 file
-   python transcribe.py audio/interview.mp3
-   
-   # Transcribe a WAV file
-   python transcribe.py audio/lecture.wav
-   
-   # Transcribe an M4A file
-   python transcribe.py audio/voice_note.m4a
+   python transcribe.py recording.mp3
    ```
 
-## Supported Audio Formats
+The tool will:
+- Load the large-v2 Whisper model
+- Detect the language automatically
+- Provide timestamps for each segment
+- Display the transcribed text
 
-- **MP3** (.mp3) - Most common audio format
-- **WAV** (.wav) - High-quality audio format
-- **M4A** (.m4a) - Common format for voice recordings
+## Output Format
 
-## Project Structure Explained
+The program outputs:
+- Language detection with confidence score
+- Timestamped transcription segments
+- Example output:
+  ```
+  Detected language: en with probability: 0.95
+  [0.00s -> 2.50s] This is an example transcription...
+  ```
+
+## Project Structure
 
 ```
 transcriber/
-├── transcribe.py     # The main program that does the transcription
-├── requirements.txt  # List of required Python packages
-└── README.md        # This help file you're reading now
+├── transcribe.py     # Main transcription script
+└── README.md        # Documentation
 ```
 
-## Troubleshooting Common Issues
+## Troubleshooting
 
-1. **"Command not found: python"**
-   - Make sure Python is installed and added to your system's PATH
-   - Try using `python3` instead of `python`
+1. **Memory Issues**
+   - The large-v2 model requires significant RAM
+   - Consider using a smaller model size if experiencing memory problems
 
-2. **"No module named 'whisper'"**
-   - Make sure you activated the virtual environment
-   - Try reinstalling requirements: `pip install -r requirements.txt`
+2. **Performance**
+   - The tool uses CPU with INT8 quantization for balanced performance
+   - Transcription speed depends on your CPU capabilities
 
-3. **"Audio file not found"**
-   - Check if the audio file path is correct
-   - Make sure you're in the right directory
-   - Use the full path to the audio file if needed
+## Technical Details
 
-4. **Virtual Environment Issues**
-   - If `venv` command not found: `python -m pip install virtualenv`
-   - If activation fails, check if you're in the project directory
-
-## Key Terms Explained
-
-- **Virtual Environment**: A clean, isolated space for your Python project
-- **pip**: Python's package installer - helps you add tools to your project
-- **Command Line**: The text interface where you type commands
-- **Repository**: The project's folder with all its files
-- **PATH**: A system setting that helps your computer find programs
-
-## Development Tips for Beginners
-
-1. Always activate your virtual environment before working
-2. Keep your Python and packages updated
-3. Check error messages carefully - they often tell you what's wrong
-4. Save audio files in supported formats (MP3, WAV, M4A)
-
-## Contributing
-
-New to coding? You can still contribute!
-1. Report bugs (things that don't work)
-2. Suggest improvements
-3. Help improve this documentation
-4. Share your experience using the tool
+- Model: Faster Whisper large-v2
+- Compute Type: INT8 quantization
+- Device: CPU
+- Beam Size: 5 (for improved accuracy)
 
 ## License
 
@@ -140,11 +104,10 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Need Help?
 
-If you're stuck:
-1. Read the error message carefully
-2. Check the troubleshooting section above
-3. Make sure you followed all steps in order
-4. Search for the error message online
-5. Ask for help in the project's issues section
+If you encounter issues:
+1. Check your Python version and dependencies
+2. Verify audio file format compatibility
+3. Ensure sufficient system resources
+4. Check the error messages for specific issues
 
 Happy Transcribing! 🎉
