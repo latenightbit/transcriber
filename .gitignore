@@ -1,0 +1,17 @@
+# Virtual environment
+whisper_env/
+whisper_env_new/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Audio files
+*.mp3
+*.wav
+*.m4a
+
+# OS files
+.DS_Store
